@@ -14,5 +14,6 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_YUKIN01_TERRAFORM_PLAYGROUND }}'
           projectId: yukin01-terraform-playground
+          entryPoint: frontend
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
