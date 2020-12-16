@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
+import React, { FC, ReactNode } from 'react'
 import Head from 'next/head'
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
   title?: string
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+export const Layout: FC<Props> = ({ children, title = 'This is the default title' }) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -15,18 +14,11 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>{' '}
-      </nav>
     </header>
     {children}
     <footer>
       <hr />
-      <span>I'm here to stay (Footer)</span>
+      <span>Powered by <a href="https://firebase.google.com/products/hosting">Firebase Hosting</a></span>
     </footer>
   </div>
 )
-
-export default Layout
