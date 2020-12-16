@@ -4,8 +4,11 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "serve": "firebase serve",
+    "deploy:hosting": "firebase deploy --only hosting"
   },
   "dependencies": {
     "next": "latest",
