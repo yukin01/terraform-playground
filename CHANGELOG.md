@@ -1,3 +1,11 @@
+## 0.0.1
+
+- Add syntax highlighting and TextArea
+  - https://prismjs.com/#basic-usage-bundlers
+  - https://github.com/mAAdhaTTah/babel-plugin-prismjs
+  - https://nextjs.org/docs/advanced-features/customizing-babel-config
+  - https://amitchauhan.tech/syntax-higlighting-with-prismjs/
+
 ## 0.0.1-alpha2
 
 - Remove frontend
