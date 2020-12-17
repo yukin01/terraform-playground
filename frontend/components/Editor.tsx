@@ -11,19 +11,11 @@ type Props = {
   setContent: SetContent
 }
 
-// type NewTabHandler = (state: { target: EventTargetElement, position: number }) => () => void
+type Handler = {
+  execute: () => void
+}
 
-// const newTabHandler: NewTabHandler = (state) => {
-//   const { target, position } = state
-//   let done = false
-//   return () => {
-//     if (done) return
-//     target.selectionStart = position
-//     target.selectionEnd = position
-//     done = true
-//   }
-// }
-class TabHandler {
+class TabHandler implements Handler {
   private done = false
   constructor(private target: EventTargetElement, private position: number) {}
   execute() {
@@ -35,12 +27,10 @@ class TabHandler {
 }
 
 export const Editor: FC<Props> = ({ language, content, setContent }) => {
-  // const [handler, setHandler] = useState<ReturnType<NewTabHandler>>()
-  const [handler, setHandler] = useState<TabHandler>()
+  const [handler, setHandler] = useState<Handler>()
 
   useEffect(() => {
     Prism.highlightAll()
-    // handler && handler()
     handler?.execute()
   }, [content])
 
@@ -52,7 +42,6 @@ export const Editor: FC<Props> = ({ language, content, setContent }) => {
     const { selectionStart, selectionEnd } = event.currentTarget
 
     setContent(prev => prev.substring(0, selectionStart) + '  ' + prev.substring(selectionEnd))
-    // setHandler(newTabHandler({ target: event.currentTarget, position: selectionStart + 2 }))
     setHandler(new TabHandler(event.currentTarget, selectionStart + 2))
   }
 
@@ -63,7 +52,6 @@ export const Editor: FC<Props> = ({ language, content, setContent }) => {
         value={content}
         onChange={event => setContent(event.target.value)}
         onKeyDown={onKeyDown}
-        // style={{ width: 1000, height: 200 }}
       />
       <pre className="code-output">
         <code className={`language-${language}`}>{content}</code>
