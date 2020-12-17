@@ -1,5 +1,5 @@
 import { Layout } from '../components/Layout'
-import { Code } from '../components/Code'
+import { Form } from '../components/Form'
 
 const code = `
 terraform {
@@ -25,7 +25,7 @@ resource "aws_vpc" "example" {
 const IndexPage = () => (
   <Layout title="The Terraform Playground">
     <h1 className="hoge">The Terraform Playground 😎</h1>
-    <Code code={code} language="hcl" />
+    <Form content={code} />
   </Layout>
 )
 
