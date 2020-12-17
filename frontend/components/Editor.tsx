@@ -63,7 +63,7 @@ export const Editor: FC<Props> = ({ language, content, setContent }) => {
         value={content}
         onChange={event => setContent(event.target.value)}
         onKeyDown={onKeyDown}
-        style={{ width: 1000, height: 200 }}
+        // style={{ width: 1000, height: 200 }}
       />
       <pre className="code-output">
         <code className={`language-${language}`}>{content}</code>

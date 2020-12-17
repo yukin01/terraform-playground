@@ -1,5 +1,5 @@
-import { Layout } from '../components/Layout'
-import { Form } from '../components/Form'
+import { Layout } from 'components/Layout'
+import { Form } from 'components/Form'
 
 const code = `
 terraform {
