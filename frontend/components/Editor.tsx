@@ -1,4 +1,4 @@
-import React, { FC, DOMAttributes, useEffect, useState } from 'react'
+import React, { FC, DOMAttributes, useEffect, useState, useRef } from 'react'
 import Prism from 'prismjs'
 
 type SetContent = React.Dispatch<React.SetStateAction<string>>
@@ -28,10 +28,15 @@ class TabHandler implements Handler {
 
 export const Editor: FC<Props> = ({ language, content, setContent }) => {
   const [handler, setHandler] = useState<Handler>()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const codeRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     Prism.highlightAll()
     handler?.execute()
+    if (containerRef.current && codeRef.current) {
+      containerRef.current.style.height = `${codeRef.current.scrollHeight + 20}px`
+    }
   }, [content])
 
   // handle 2-space indent on
@@ -46,7 +51,7 @@ export const Editor: FC<Props> = ({ language, content, setContent }) => {
   }
 
   return (
-    <div className="code-edit-container">
+    <div className="code-edit-container" ref={containerRef}>
       <textarea
         className="code-input"
         value={content}
@@ -54,7 +59,7 @@ export const Editor: FC<Props> = ({ language, content, setContent }) => {
         onKeyDown={onKeyDown}
       />
       <pre className="code-output">
-        <code className={`language-${language}`}>{content}</code>
+        <code className={`language-${language}`} ref={codeRef}>{content}</code>
       </pre>
     </div>
   )
