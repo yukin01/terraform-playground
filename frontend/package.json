@@ -11,7 +11,8 @@
     "deploy:hosting": "firebase deploy --only hosting"
   },
   "dependencies": {
-    "next": "latest",
+    "bulma": "^0.9.1",
+    "next": "^10.0.3",
     "prismjs": "^1.22.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"

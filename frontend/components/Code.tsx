@@ -2,17 +2,17 @@ import React, { FC, useEffect } from 'react'
 import Prism from 'prismjs'
 
 type Props = {
-  code: string
   language: string
+  content: string
 }
 
-export const Code: FC<Props> = ({ code, language }) => {
+export const Code: FC<Props> = ({ content, language }) => {
   useEffect(() => {
     Prism.highlightAll()
   })
   return (
-    <pre className="line-numbers">
-      <code className={`language-${language}`}>{code}</code>
+    <pre>
+      <code className={`language-${language}`}>{content}</code>
     </pre>
   )
 }

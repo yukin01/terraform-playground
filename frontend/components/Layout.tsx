@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const Layout: FC<Props> = ({ children, title = 'This is the default title' }) => (
-  <div>
+  <div style={{ margin: "16px" }}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
