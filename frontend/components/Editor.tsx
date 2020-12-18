@@ -1,4 +1,4 @@
-import React, { FC, DOMAttributes, useEffect, useState, useRef } from 'react'
+import React, { FC, DOMAttributes, useState, useRef, useLayoutEffect } from 'react'
 import Prism from 'prismjs'
 
 type SetContent = React.Dispatch<React.SetStateAction<string>>
@@ -31,7 +31,7 @@ export const Editor: FC<Props> = ({ language, content, setContent }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const codeRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     Prism.highlightAll()
     handler?.execute()
     if (containerRef.current && codeRef.current) {
