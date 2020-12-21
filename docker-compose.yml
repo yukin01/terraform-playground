@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    command: "realize start"
+    volumes:
+      - ./backend:/go/src
+    ports:
+      - "8080:8080"

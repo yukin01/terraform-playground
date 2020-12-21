@@ -1,0 +1,13 @@
+FROM golang:1.15.6-buster
+
+WORKDIR /go/src
+
+RUN set -eux; \
+  apt-get update; \
+  apt-get install -y \
+    zip; \
+  go get github.com/oxequa/realize
+
+ADD entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
