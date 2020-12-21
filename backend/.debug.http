@@ -1,1 +1,20 @@
-http://localhost:8080/versions
+GET http://localhost:8080/ HTTP/1.1
+
+###
+
+GET http://localhost:8080/versions HTTP/1.1
+
+###
+
+POST http://localhost:8080/apply HTTP/1.1
+content-type: application/json
+
+{
+  "version": "0.13.5",
+  "files": [
+    {
+      "name": "main.tf",
+      "content": "output \"message\" {\n  value = \"Hello World!\"\n}\n"
+    }
+  ]
+}

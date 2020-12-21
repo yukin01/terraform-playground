@@ -12,9 +12,10 @@ func main() {
 	e.Use(middleware.Logger())
 
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
+		return c.NoContent(http.StatusOK)
 	})
 	e.GET("/versions", Versions)
+	e.POST("/apply", Apply)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
