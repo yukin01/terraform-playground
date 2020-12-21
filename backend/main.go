@@ -1,13 +1,20 @@
 package main
 
 import (
-	"log"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
+	e := echo.New()
+	e.Use(middleware.Logger())
 
-	http.HandleFunc("/versions", Versions)
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World!")
+	})
+	e.GET("/versions", Versions)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	e.Logger.Fatal(e.Start(":8080"))
 }
