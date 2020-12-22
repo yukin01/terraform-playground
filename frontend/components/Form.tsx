@@ -14,9 +14,10 @@ export const Form: FC<Props> = ({ content: initialContent }) => {
   const [versions, setVersions] = useState<string[]>([placeholder])
   const [version, setVersion] = useState<string>()
   const [output, setOutput] = useState<string>("output")
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    fetch("/versions")
+    fetch("/api/v1/versions")
       .then(res => res.json() as Promise<string[]>)
       .then(versions => {
         const sorted = versions.sort().reverse()
@@ -31,13 +32,15 @@ export const Form: FC<Props> = ({ content: initialContent }) => {
       return setOutput("The content is too long")
     }
     setOutput("...")
+    setLoading(true)
     const body = JSON.stringify({ version, files: [{ name: "main.tf", content }]})
     const headers = {
       'Content-Type': 'application/json'
     };
-    fetch("/apply", { method: "POST", headers, body })
+    fetch("/api/v1/apply", { method: "POST", headers, body })
       .then(res => res.text() as Promise<string>)
       .then(setOutput)
+      .then(() => setLoading(false))
   }
 
   return (
@@ -50,7 +53,7 @@ export const Form: FC<Props> = ({ content: initialContent }) => {
         </select>
       </div>
       <Editor language="hcl" content={content} setContent={setContent} />
-      <hr />
+      {loading ? <progress className="progress mb-0 is-small is-primary" max="100"></progress> : <hr />}
       <Code language="hcl" content={output}/>
     </div>
   )

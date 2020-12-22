@@ -14,8 +14,8 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.NoContent(http.StatusOK)
 	})
-	e.GET("/versions", Versions)
-	e.POST("/apply", Apply)
+	e.GET("/api/v1/versions", Versions)
+	e.POST("/api/v1/apply", Apply)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
