@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Editor } from './Editor'
 import { Code } from './Code'
 
@@ -6,23 +6,52 @@ type Props = {
   content: string
 }
 
+const placeholder = "Terraform version"
+const maxContentLength = 1024
+
 export const Form: FC<Props> = ({ content: initialContent }) => {
   const [content, setContent] = useState<string>(initialContent)
+  const [versions, setVersions] = useState<string[]>([placeholder])
+  const [version, setVersion] = useState<string>()
+  const [output, setOutput] = useState<string>("output")
+
+  useEffect(() => {
+    fetch("/versions")
+      .then(res => res.json() as Promise<string[]>)
+      .then(versions => {
+        const sorted = versions.sort().reverse()
+        setVersions(sorted)
+        setVersion(sorted.length ? sorted[0] : undefined)
+      })
+  }, [])
+
+  const onApply = () => {
+    if (!version || !content) return
+    if (content.length > maxContentLength) {
+      return setOutput("The content is too long")
+    }
+    setOutput("...")
+    const body = JSON.stringify({ version, files: [{ name: "main.tf", content }]})
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+    fetch("/apply", { method: "POST", headers, body })
+      .then(res => res.text() as Promise<string>)
+      .then(setOutput)
+  }
 
   return (
     <div>
-      <button className="button mr-2">Apply</button>
+      <button className="button mr-2" onClick={onApply}>Apply</button>
       <button className="button mr-2" onClick={() => setContent(initialContent)}>Reset</button>
       <div className="select">
-        <select>
-          <option>Terraform version (v0.14.2)</option>
-          <option>v0.14.1</option>
-          <option>v0.14.0</option>
+        <select onChange={e => setVersion(e.target.value.substring(1))}>
+          {versions.map(version => <option key={version}>v{version}</option>)}
         </select>
       </div>
       <Editor language="hcl" content={content} setContent={setContent} />
       <hr />
-      <Code language="hcl" content="output"/>
+      <Code language="hcl" content={output}/>
     </div>
   )
 }
