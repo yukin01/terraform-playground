@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/node": "^12.12.21",
     "@types/prismjs": "^1.16.2",
-    "@types/react": "^16.9.16",
+    "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.4",
     "babel-plugin-prismjs": "^2.0.1",
     "firebase-tools": "^9.0.0",
