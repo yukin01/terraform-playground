@@ -1,3 +1,9 @@
+## 0.1.0
+
+- Only `terraform plan` support
+- Deploy backend service
+- Progress bar is now displayed during communication
+
 ## 0.0.1
 
 - Add syntax highlighting and TextArea
