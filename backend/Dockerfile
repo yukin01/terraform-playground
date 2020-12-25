@@ -28,7 +28,9 @@ WORKDIR /home/backend
 
 COPY --chown=backend:backend --from=builder /go/bin/app /app
 
-ADD entrypoint.sh /entrypoint.sh
+ADD entrypoint.sh install.sh /
+
+RUN bash -c "/install.sh"
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 

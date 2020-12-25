@@ -2,7 +2,7 @@ data "google_project" "this" {}
 
 locals {
   repository_name = "${var.gcr_hostname}/${data.google_project.this.project_id}/backend"
-  image_tag       = "0.1.0"
+  image_tag       = "0.1.1"
 }
 
 resource "google_cloud_run_service" "backend" {

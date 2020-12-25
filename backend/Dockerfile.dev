@@ -8,6 +8,8 @@ RUN set -eux; \
     zip; \
   go get github.com/oxequa/realize
 
-ADD entrypoint.sh /entrypoint.sh
+ADD entrypoint.sh install.sh /
+
+RUN bash -c "/install.sh"
 
 ENTRYPOINT [ "/entrypoint.sh" ]
