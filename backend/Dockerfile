@@ -10,7 +10,7 @@ COPY .  .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/app
 
 
-FROM alpine:3.12 AS runner
+FROM alpine:3.13 AS runner
 
 RUN apk add --no-cache \
     ca-certificates \
