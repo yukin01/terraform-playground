@@ -11,7 +11,7 @@ services:
       - "8080:8080"
 
   frontend:
-    image: node:14-buster-slim
+    image: node:14.21.3-buster-slim
     working_dir: /frontend
     command: bash -c "yarn && yarn dev"
     volumes:
